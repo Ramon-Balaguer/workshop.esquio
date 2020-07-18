@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ApiDescriptionConflictResolver.cs" />
+    <Compile Remove="Controllers\EsquioController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Esquio.AspNetCore" Version="3.1.1" />
+    <PackageReference Include="Esquio.Configuration.Store" Version="3.1.0" />
+    <PackageReference Include="Esquio.Http.Store" Version="3.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.EsquioResolver" Version="1.0.0" />
+    <PackageReference Include="Swashbuckle.Core" Version="5.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="pokedex.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+
+</Project>

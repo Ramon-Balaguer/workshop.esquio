@@ -1,0 +1,41 @@
+version: '3.3'
+services:
+  #app:
+  #    image: app
+  #    container_name: app
+  #    depends_on: 
+  #        - ui
+  #    ports:
+  #        - 8060:80
+  #    build:
+  #        context: ..
+  #        dockerfile: build/DemoDockerfile
+  #    environment:
+  #        - EsquioHttpStore__BaseAddress=http://ui:80
+  #        - EsquioHttpStore__ApiKey=ZgZ9/qcwJGe/Utefuym5YS/84mE8/9x7kIrx2V/aIxc=
+  ui:
+    image: xabarilcoding/esquioui:3.1.0
+    container_name: ui
+    depends_on: 
+      - postgres
+    ports:
+      - 8090:80
+    links:
+      - postgres
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionString__esquio: Host=postgres;Port=5432;Database=Esquio;User Id=postgres;Password=Password12!
+      Data__Store: NpgSql
+      Serilog__MinimumLevel: Debug
+      ApplicationInsights__InstrumentationKey: 00000000-0000-0000-0000-000000000000
+      Security__DefaultSubjectId: 1
+      Security__OpenId__ClientId: interactive.public
+      Security__OpenId__Audience: api
+      Security__OpenId__Authority: https://demo.identityserver.io/
+      Security__OpenId__ResponseType: code
+      Security__OpenId__RequireHttpsMetadata: "true"
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: Password12!
