@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace WebApi
+namespace WebApi.Model
 {
     public class PokemonSuper
     {

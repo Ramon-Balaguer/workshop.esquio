@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using WebApi.Infrastructure;
+using WebApi.Model;
 
 namespace WebApi.Controllers
 {
@@ -14,13 +15,11 @@ namespace WebApi.Controllers
     [Route("[controller]")]
     public class PokedexController : ControllerBase
     {
-        private readonly ILogger<PokedexController> logger;
         private readonly IConfiguration configuration;
         private readonly PokemonReader pokemonReader;
 
-        public PokedexController(ILogger<PokedexController> logger, IConfiguration configuration, PokemonReader pokemonReader)
+        public PokedexController(IConfiguration configuration, PokemonReader pokemonReader)
         {
-            this.logger = logger;
             this.configuration = configuration;
             this.pokemonReader = pokemonReader;
         }
