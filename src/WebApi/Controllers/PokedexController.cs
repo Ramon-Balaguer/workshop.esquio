@@ -26,27 +26,26 @@ namespace WebApi.Controllers
 
         [HttpGet]
         [ActionName("Get")]
-        public IEnumerable<Pokemon> Get()
+        public IEnumerable<Pokemon> Get([FromQuery]string name)
         {
-            return pokemonReader.Read(configuration.GetValue<string>("PokedexPath"));
+            var pokemons = pokemonReader.Read(configuration.GetValue<string>("PokedexPath"));
+            var pokemonsByName = FilterPokemonByName(pokemons, name);
+            return pokemonsByName;
         }
 
-        [FeatureFilter(Name = Flags.Pokedex)]
         [HttpGet]
-        [ActionName("Get")]
-        public IEnumerable<PokemonSuper> GetNew()
+        public IEnumerable<Pokemon> Get([FromQuery] string name)
         {
-            return new List<PokemonSuper>
-            {
-                new PokemonSuper
-                {
-                    Name = new PokemonName{
-                        English = "Meri"
-                    },
-                    Id = 4444,
-                    Deparment = "Payments"
-                }
-            };
+            var pokemons = pokemonReader.Read(configuration.GetValue<string>("PokedexPath"));
+            var pokemonsByName = FilterPokemonByName(pokemons, name);
+            return pokemonsByName;
+        }
+
+        private static IEnumerable<Pokemon> FilterPokemonByName(List<Pokemon> pokemons, string name)
+        {
+            if (string.IsNullOrEmpty(name))
+                return pokemons;
+            return pokemons.Where(pokemon => pokemon.Name.English.ToLower().StartsWith(name.ToLower()));
         }
     }
 }

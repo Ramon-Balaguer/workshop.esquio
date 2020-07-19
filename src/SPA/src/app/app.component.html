@@ -1,10 +1,11 @@
 <!-- Toolbar -->
-<div class="toolbar" role="banner">
-  <span>Welcome</span>
+<div class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner">
+  <span>Pokemon Database</span>
 </div>
 
-<div class="content" role="main">
+<div class="container">
 
- <app-pokemon-grid  [removeIfFeatureOff]="'Pokedex'"></app-pokemon-grid>
 
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>
+
+</div>

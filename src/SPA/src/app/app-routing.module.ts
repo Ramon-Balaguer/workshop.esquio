@@ -6,10 +6,8 @@ import { FeatureFlagGuardService } from './feature-toggle/feature-flag-guard.ser
 
 const routes: Routes = [
   {
-      path: "pokemons",
-      component: PokemonGridComponent,
-      canActivate: [FeatureFlagGuardService],
-      data: { featureName: 'Pokedex' }
+    path: "",
+    component: PokemonGridComponent,
   }
 ];
 

@@ -12,10 +12,10 @@ import { Observable, throwError as _observableThrow, of as _observableOf } from 
 import { Injectable, Inject, Optional, InjectionToken } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse, HttpResponseBase } from '@angular/common/http';
 
-export const PokemonServiceApiBaseUrl = new InjectionToken<string>('API_BASE_URL');
+export const PokemonServiceApiBaseUrl = new InjectionToken<string>('PokemonServiceApiBaseUrl');
 
 @Injectable()
-export class PokemonService {
+export class PokedexClient {
     private http: HttpClient;
     private baseUrl: string;
     protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
@@ -26,10 +26,13 @@ export class PokemonService {
     }
 
     /**
+     * @param name (optional)
      * @return Success
      */
-    pokedex(): Observable<Pokemon[]> {
-        let url_ = this.baseUrl + "/Pokedex";
+    pokedex(name: string | null | undefined): Observable<Pokemon[]> {
+        let url_ = this.baseUrl + "/Pokedex?";
+        if (name !== undefined && name !== null)
+            url_ += "name=" + encodeURIComponent("" + name) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -118,7 +121,7 @@ export class PokemonName implements IPokemonName {
         data["japanese"] = this.japanese;
         data["chinese"] = this.chinese;
         data["french"] = this.french;
-        return data; 
+        return data;
     }
 }
 
@@ -172,7 +175,7 @@ export class PokemonStat implements IPokemonStat {
         data["speedAttack"] = this.speedAttack;
         data["speedDefense"] = this.speedDefense;
         data["speed"] = this.speed;
-        return data; 
+        return data;
     }
 }
 
@@ -230,7 +233,7 @@ export class Pokemon implements IPokemon {
                 data["type"].push(item);
         }
         data["base"] = this.base ? this.base.toJSON() : <any>undefined;
-        return data; 
+        return data;
     }
 }
 
