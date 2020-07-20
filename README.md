@@ -87,8 +87,8 @@ import { AboutUsComponent } from './about-us/about-us.component';
 ---------------
 # Tercera US
 - editamos el boton pokemon-grid.component.html
-        <button id="searchButton" (click)="submitFilter()" class="btn btn-primary" [removeIfFeatureOff]="'Danger'">Submit</button>
-        <button id="searchButton" (click)="submitFilter()" class="btn btn-danger" [removeIfFeatureOn]="'Danger'">Submit</button>
+        <button id="searchButton" (click)="submitFilter()" class="btn btn-primary" *removeIfFeatureOff="'Danger'">Submit</button>
+        <button id="searchButton" (click)="submitFilter()" class="btn btn-danger" *removeIfFeatureOn="'Danger'">Submit</button>
 
 - FIN
 

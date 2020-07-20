@@ -26,7 +26,7 @@ export class EsquioService {
     }
 
     /**
-     * @param featureName (optional) 
+     * @param featureName (optional)
      * @return Success
      */
     esquio(featureName: string[] | null | undefined): Observable<FeatureToggle[]> {
@@ -115,7 +115,7 @@ export class FeatureToggle implements IFeatureToggle {
         data = typeof data === 'object' ? data : {};
         data["enabled"] = this.enabled;
         data["name"] = this.name;
-        return data; 
+        return data;
     }
 }
 

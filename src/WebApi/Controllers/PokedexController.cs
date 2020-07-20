@@ -25,16 +25,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        [ActionName("Get")]
         public IEnumerable<Pokemon> Get([FromQuery]string name)
-        {
-            var pokemons = pokemonReader.Read(configuration.GetValue<string>("PokedexPath"));
-            var pokemonsByName = FilterPokemonByName(pokemons, name);
-            return pokemonsByName;
-        }
-
-        [HttpGet]
-        public IEnumerable<Pokemon> Get([FromQuery] string name)
         {
             var pokemons = pokemonReader.Read(configuration.GetValue<string>("PokedexPath"));
             var pokemonsByName = FilterPokemonByName(pokemons, name);
