@@ -9,7 +9,6 @@ import {NgIf} from '@angular/common';
 export class RemoveIfFeatureOffDirective extends NgIf {
   @Input('removeIfFeatureOff') featureName: string;
 
-
   constructor(
     private templateRef: TemplateRef<any>,
     private viewContainer: ViewContainerRef,
@@ -19,14 +18,13 @@ export class RemoveIfFeatureOffDirective extends NgIf {
 
   ngOnInit() {
     this.esquioService.esquio([this.featureName]).subscribe((featureToggles: FeatureToggle[])=>{
-    let featureToggle = featureToggles.find(feature => feature.name == this.featureName);
-    console.log(`Feature toggle: ${featureToggle.enabled}`)
-    if (featureToggle.enabled) {
-        this.viewContainer.clear();
-    }else
-    {
+      let featureToggle = featureToggles.find(feature => feature.name == this.featureName);
+      console.log(`Feature toggle: ${featureToggle.enabled}`)
+      if (featureToggle.enabled) {
+          this.viewContainer.clear();
+          return;
+      }
       this.viewContainer.createEmbeddedView(this.templateRef);
-    }
     });
   }
 }

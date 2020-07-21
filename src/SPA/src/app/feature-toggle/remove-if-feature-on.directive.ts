@@ -10,10 +10,10 @@ export class RemoveIfFeatureOnDirective extends NgIf {
   @Input('removeIfFeatureOn') featureName: string;
 
   constructor(
-              private templateRef: TemplateRef<any>,
-              private viewContainer: ViewContainerRef,
-              private esquioService: EsquioService) {
-                super(viewContainer, null);
+    private templateRef: TemplateRef<any>,
+    private viewContainer: ViewContainerRef,
+    private esquioService: EsquioService) {
+      super(viewContainer, templateRef);
   }
 
   ngOnInit() {
@@ -22,10 +22,9 @@ export class RemoveIfFeatureOnDirective extends NgIf {
       console.log(`Feature toggle: ${featureToggle.enabled}`)
       if (!featureToggle.enabled) {
           this.viewContainer.clear();
-      }else
-      {
-        this.viewContainer.createEmbeddedView(this.templateRef);
+          return;
       }
+      this.viewContainer.createEmbeddedView(this.templateRef);
     });
   }
 }
